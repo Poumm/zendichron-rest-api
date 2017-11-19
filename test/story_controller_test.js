@@ -39,13 +39,13 @@ describe("Story controller", () => {
     });
   });
 
-  it("Get on /stories/:id : and get a unique of story by _id", done => {
+  it("Get on /story/:id : and get a unique of story by _id", done => {
     const tuto0 = new story({ title: "tuto0", code: "tuto0" });
     const perso0 = new story({ title: "perso0", code: "perso0" });
 
     Promise.all([tuto0.save(), perso0.save()]).then(() => {
       request(app)
-        .get(`/stories/${tuto0._id}`)
+        .get(`/story/${tuto0._id}`)
         .end((err, res) => {
           assert(res.status === 200);
           assert(res.body[0].title == "tuto0");

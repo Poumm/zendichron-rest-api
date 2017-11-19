@@ -10,5 +10,14 @@ module.exports = {
         res.send(stories);
       })
       .catch(next);
+  },
+
+  findById(req, res, next) {
+    const _id = req.params.id;
+    Story.find({ _id })
+      .then(stories => {
+        res.send(stories);
+      })
+      .catch(next);
   }
 };

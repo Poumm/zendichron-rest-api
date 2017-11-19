@@ -5,7 +5,8 @@ const PageSchema = require("./page");
 
 const StorySchema = new Schema({
   title: { type: String, required: true },
-  isOfficial: { type: boolean, default: false, required: true },
+  code: { type: String, required: true },
+  isOfficial: { type: Boolean, default: false, required: true },
   pages: [PageSchema]
 });
 

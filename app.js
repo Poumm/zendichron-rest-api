@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== "test")
 // En effet l'ordre défini ici est l'ordre dans lequel les middleware sont appelés
 app.use(bodyParser.json());
 
-app.get("/", function() {
+app.get("/", function(req, res) {
   res.send("Running");
 });
 storyRoutes(app);

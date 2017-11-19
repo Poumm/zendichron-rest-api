@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const PageSchema = require("./page");
 
 const StorySchema = new Schema({
-  title: { type: String, required: true },
-  code: { type: String, required: true },
+  title: { type: String, required: true, unique: true },
+  code: { type: String, required: true, unique: true },
   isOfficial: { type: Boolean, default: false, required: true },
   pages: [PageSchema]
 });

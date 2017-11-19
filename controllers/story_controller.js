@@ -19,5 +19,12 @@ module.exports = {
         res.send(stories);
       })
       .catch(next);
+  },
+
+  findPageByStoryAndCode(req, res, next) {
+    const { storyCode, pageCode } = req.params;
+    Story.findOne({ code: storyCode, "pages.code": pageCode }).then(story => {
+      res.send(story.pages[0]);
+    });
   }
 };

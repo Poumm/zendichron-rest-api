@@ -53,4 +53,25 @@ describe("Story controller", () => {
         });
     });
   });
+
+  it("Get on /story/:storyCode/page/:pageCode : and get a unique page", done => {
+    const tuto0 = new story({
+      title: "tuto0",
+      code: "tuto0",
+      pages: [
+        { title: "Page 1", code: "page1" },
+        { title: "Page 2", code: "page2" }
+      ]
+    });
+    const perso0 = new story({ title: "perso0", code: "perso0" });
+
+    Promise.all([tuto0.save(), perso0.save()]).then(() => {
+      request(app)
+        .get(`/story/tuto0/page/page1`)
+        .end((err, res) => {
+          assert(res.status === 200);
+          done();
+        });
+    });
+  });
 });

@@ -5,5 +5,8 @@ module.exports = app => {
 
   app.get("/story/:id", StoryController.findById);
 
-  app.get("/story/:code/page");
+  app.get(
+    "/story/:storyCode/page/:pageCode",
+    StoryController.findPageByStoryAndCode
+  );
 };

@@ -9,4 +9,6 @@ module.exports = app => {
     "/story/:storyCode/page/:pageCode",
     StoryController.findPageByStoryAndCode
   );
+
+  app.put("/story", StoryController.create);
 };

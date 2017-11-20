@@ -23,8 +23,20 @@ module.exports = {
 
   findPageByStoryAndCode(req, res, next) {
     const { storyCode, pageCode } = req.params;
-    Story.findOne({ code: storyCode, "pages.code": pageCode }).then(story => {
-      res.send(story.pages[0]);
-    });
+    Story.findOne({ code: storyCode, "pages.code": pageCode })
+      .then(story => {
+        res.send(story.pages[0]);
+      })
+      .catch(next);
+  },
+
+  create(req, res, next) {
+    const props = req.body;
+    props.code = props.title.replace(/[^\w]/gi, "").toLowerCase();
+    Story.create(props)
+      .then(story => {
+        res.send(story);
+      })
+      .catch(next);
   }
 };

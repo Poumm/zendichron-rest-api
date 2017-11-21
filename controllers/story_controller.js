@@ -23,7 +23,7 @@ module.exports = {
 
   findPageByStoryAndCode(req, res, next) {
     const { storyCode, pageCode } = req.params;
-    Story.findOne({ code: storyCode, "pages.code": pageCode })
+    Story.findOne({ code: storyCode, "pages.code": pageCode }, { "pages.$": 1 })
       .then(story => {
         res.send(story.pages[0]);
       })
@@ -46,7 +46,7 @@ module.exports = {
     const { code } = req.params;
     Story.findOne({ code })
       .then(story => {
-        story.pages.push({ title: "page$ 1", code: "page1" });
+        story.pages.push(props);
         return story.save();
       })
       .then(() => Story.find({ code }))

@@ -6,3 +6,5 @@ const PageSchema = new Schema({
   code: { type: String, required: true, unique: true },
   content: Object
 });
+
+module.exports = PageSchema;

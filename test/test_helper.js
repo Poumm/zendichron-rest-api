@@ -14,6 +14,9 @@ beforeEach(done => {
   const { stories } = mongoose.connection.collections;
   stories
     .drop()
-    .then(() => done())
+    .then(() => {
+      console.log("dropped");
+      done();
+    })
     .catch(() => done());
 });

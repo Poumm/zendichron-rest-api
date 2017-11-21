@@ -38,5 +38,19 @@ module.exports = {
         res.send(story);
       })
       .catch(next);
+  },
+
+  addPage(req, res, next) {
+    const props = req.body;
+    props.code = props.title.replace(/[^\w]/gi, "").toLowerCase();
+    const { code } = req.params;
+    Story.findOne({ code })
+      .then(story => {
+        story.pages.push({ title: "page$ 1", code: "page1" });
+        return story.save();
+      })
+      .then(() => Story.find({ code }))
+      .then(updated => res.send(updated))
+      .catch(next);
   }
 };

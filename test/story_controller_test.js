@@ -8,6 +8,7 @@ const Story = require("../models/story");
 describe("Story controller", () => {
   it("Get on /stories : and get  a list of stories without params", done => {
     const tuto0 = new Story({ title: "tuto0", code: "tuto0" });
+
     tuto0.save().then(() => {
       request(app)
         .get("/stories")
@@ -75,7 +76,7 @@ describe("Story controller", () => {
     });
   });
 
-  it("PUT a story to /story : create a story on DB", done => {
+  it("PUT to /story : create a story on DB", done => {
     Story.count().then(beforeCount => {
       request(app)
         .put("/story")
@@ -89,6 +90,24 @@ describe("Story controller", () => {
               assert(story.code === "tuto1");
               done();
             });
+          });
+        });
+    });
+  });
+
+  it("PUT to /story/:id/page : add a page to story on DB", done => {
+    const tuto0 = new Story({ title: "tuto3", code: "tuto3" });
+    tuto0.save().then(() => {
+      request(app)
+        .put(`/story/${tuto0.code}/page`)
+        .send({ title: "page$ 1" })
+        .end((err, res) => {
+          assert(res.status === 200);
+          Story.findOne({ code: "tuto3" }).then(story => {
+            //Test la génération du code à partir du titre
+            assert(story.pages.length === 1);
+            assert(story.pages[0].code === "page1");
+            done();
           });
         });
     });

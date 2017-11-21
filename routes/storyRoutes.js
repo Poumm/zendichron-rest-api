@@ -11,4 +11,6 @@ module.exports = app => {
   );
 
   app.put("/story", StoryController.create);
+
+  app.put("/story/:code/page", StoryController.addPage);
 };

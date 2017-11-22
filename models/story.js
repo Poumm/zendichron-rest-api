@@ -7,6 +7,7 @@ const StorySchema = new Schema({
   title: { type: String, required: true, unique: true },
   code: { type: String, required: true, unique: true },
   isOfficial: { type: Boolean, default: false, required: true },
+  summary: String,
   pages: [PageSchema]
 });
 

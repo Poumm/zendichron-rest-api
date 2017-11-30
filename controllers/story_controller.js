@@ -8,8 +8,8 @@ module.exports = {
     Story.find(param)
       .then(stories => {
         stories = stories.map(story => {
-          const { title, code, isOfficial, summary } = story;
-          return { title, code, isOfficial, summary };
+          const { _id, title, code, isOfficial, summary } = story;
+          return { _id, title, code, isOfficial, summary };
         });
         res.send(stories);
       })

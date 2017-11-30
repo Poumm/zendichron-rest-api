@@ -6,12 +6,15 @@ const app = require("../app");
 const Story = require("../models/story");
 
 describe("Story controller", () => {
-  it("Get on /stories : and get  a list of stories without params", done => {
+  it("Get on /stories : and get  a list of stories without pages", done => {
     request(app)
       .get("/stories")
       .end((err, res) => {
         assert(res.status === 200);
         assert(res.body.length === 2);
+        res.body.map(story => {
+          assert((story.pages = []));
+        });
         done();
       });
   });
@@ -77,13 +80,12 @@ describe("Story controller", () => {
           assert(res.status === 200);
           assert(res.body[0].pages.length === 3);
 
-          Story.findOne(
-            { "pages.code": "page23" },
-            { "pages.$": 1 }
-          ).then(page23 => {
-            assert(page23.pages[0].code === "page23");
-            done();
-          });
+          Story.findOne({ "pages.code": "page23" }, { "pages.$": 1 }).then(
+            page23 => {
+              assert(page23.pages[0].code === "page23");
+              done();
+            }
+          );
         });
     });
   });

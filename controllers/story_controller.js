@@ -7,6 +7,10 @@ module.exports = {
     const param = req.query;
     Story.find(param)
       .then(stories => {
+        stories = stories.map(story => {
+          const { title, code, isOfficial, summary } = story;
+          return { title, code, isOfficial, summary };
+        });
         res.send(stories);
       })
       .catch(next);

@@ -10,7 +10,7 @@ module.exports = app => {
     StoryController.findPageByStoryAndCode
   );
 
-  app.put("/story", StoryController.create);
+  app.post("/story", StoryController.create);
 
   app.put("/story/:code/page", StoryController.addPage);
 };

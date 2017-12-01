@@ -37,6 +37,7 @@ module.exports = {
   create(req, res, next) {
     const props = req.body;
     props.code = props.title.replace(/[^\w]/gi, "").toLowerCase();
+    console.log(props);
     Story.create(props)
       .then(story => {
         res.send(story);

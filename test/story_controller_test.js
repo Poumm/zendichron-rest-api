@@ -52,10 +52,10 @@ describe("Story controller", () => {
       });
   });
 
-  it("PUT to /story : create a story on DB", done => {
+  it("POST to /story : create a story on DB", done => {
     Story.count().then(beforeCount => {
       request(app)
-        .put("/story")
+        .post("/story")
         .send({ title: "Tuto$ 3" })
         .end((err, res) => {
           assert(res.status === 200);

@@ -18,9 +18,18 @@ module.exports = {
 
   findById(req, res, next) {
     const _id = req.params.id;
-    Story.find({ _id })
-      .then(stories => {
-        res.send(stories);
+    Story.findOne({ _id })
+      .then(story => {
+        res.send(story);
+      })
+      .catch(next);
+  },
+
+  findByParams(req, res, next) {
+    const { code } = req.query;
+    Story.findOne({ code })
+      .then(story => {
+        res.send(story);
       })
       .catch(next);
   },

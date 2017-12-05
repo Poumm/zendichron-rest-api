@@ -36,10 +36,20 @@ describe("Story controller", () => {
         .get(`/story/${tuto0._id}`)
         .end((err, res) => {
           assert(res.status === 200);
-          assert(res.body[0].title == "tuto0");
+          assert(res.body.title == "tuto0");
           done();
         });
     });
+  });
+
+  it("Get on /story with the code param : and get a unique of story by code", done => {
+    request(app)
+      .get(`/story?code=tuto0`)
+      .end((err, res) => {
+        assert(res.status === 200);
+        assert(res.body.title == "tuto0");
+        done();
+      });
   });
 
   it("Get on /story/:storyCode/page/:pageCode : and get a unique page", done => {

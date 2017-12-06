@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const Story = require("../models/story");
 
+function createCodeFromTitle(title) {
+  return title.replace(/[^\w]/gi, "").toLowerCase();
+}
+
 module.exports = {
   find(req, res, next) {
     const param = req.query;
@@ -45,7 +49,7 @@ module.exports = {
 
   create(req, res, next) {
     const props = req.body;
-    props.code = props.title.replace(/[^\w]/gi, "").toLowerCase();
+    props.code = createCodeFromTitle(props.title);
     Story.create(props)
       .then(story => {
         res.send(story);
@@ -54,8 +58,21 @@ module.exports = {
   },
 
   addPage(req, res, next) {
+    const { storyId } = req.params;
+    const { title } = req.body;
+    const code = createCodeFromTitle(title);
+    Story.findOne({ _id: storyId })
+      .then(story => {
+        story.pages.push({ title, code });
+        return story.save();
+      })
+      .then(() => res.send({ code }))
+      .catch(next);
+  },
+
+  editPage(req, res, next) {
     const props = req.body;
-    props.code = props.title.replace(/[^\w]/gi, "").toLowerCase();
+    props.code = createCodeFromTitle(props.title);
     const { code } = req.params;
     Story.findOne({ code })
       .then(story => {

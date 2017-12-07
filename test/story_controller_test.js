@@ -52,9 +52,9 @@ describe("Story controller", () => {
       });
   });
 
-  it("Get on /story/:storyCode/page/:pageCode : and get a unique page", done => {
+  it("Get on /pageContent : and get a unique page", done => {
     request(app)
-      .get(`/story/tuto0/page/page1`)
+      .get(`/pageContent?storyCode=tuto0&pageCode=page1`)
       .end((err, res) => {
         assert(res.status === 200);
         assert(res.body.code === "page1");

@@ -7,6 +7,13 @@ module.exports = app => {
 
   app.get("/pageContent", StoryController.findPageByStoryAndCode);
   app.post("/story", StoryController.create);
+<<<<<<< HEAD
   app.post("/Story/:storyId/page", StoryController.addPage);
   app.put("/story/:code/page", StoryController.editPage);
+=======
+
+  app.put("/story/:code/page", StoryController.addPage);
+
+  app.put("/story/:storyId/page/:pageId/content", StoryController.updateContent);
+>>>>>>> update content ok
 };

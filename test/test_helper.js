@@ -22,7 +22,7 @@ beforeEach(done => {
         code: "tuto0",
         isOfficial: true,
         pages: [
-          { title: "Page 1", code: "page1" },
+          { title: "Page 1", code: "page1", content: "old content" },
           { title: "Page 2", code: "page2" }
         ]
       });

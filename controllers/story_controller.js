@@ -84,5 +84,20 @@ module.exports = {
       .then(() => Story.find({ code }))
       .then(updated => res.send(updated))
       .catch(next);
+  },
+
+  updateContent(req, res, next) {
+    const { content } = req.body;
+    const { storyId, pageId } = req.params;
+    Story.findById(storyId)
+      .then(story => {
+        let toUpdate = story.pages.id(pageId);
+        toUpdate.set({ content });
+        return story.save();
+
+      })
+      .then(() => Story.findById(storyId))
+      .then(updated => res.send(updated))
+      .catch(next);
   }
 };

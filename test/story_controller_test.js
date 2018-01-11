@@ -118,4 +118,17 @@ describe("Story controller", () => {
         });
     });
   });
+
+  it("PUT to /story/:storyId/page/:pageId/content : update content of  page on DB", done => {
+    Story.findOne({ code: "tuto0" }).then(tuto0 => {
+      request(app)
+        .put(`/story/${tuto0._id}/page/${tuto0.pages[0]._id}/content`)
+        .send({ content: "updated content" })
+        .end((err, res) => {
+          assert(res.status === 200);
+          assert(res.body.pages[0].content === "updated content");
+          done();
+        });
+    });
+  });
 });

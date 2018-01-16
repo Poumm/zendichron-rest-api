@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Story = require("../models/story");
 
-const content = require("../datas/content");
+const baseContent = require("../datas/content");
 
 function createCodeFromTitle(title) {
   return title.replace(/[^\w]/gi, "").toLowerCase();
@@ -65,7 +65,7 @@ module.exports = {
     const code = createCodeFromTitle(title);
     Story.findOne({ _id: storyId })
       .then(story => {
-        story.pages.push({ title, code, content });
+        story.pages.push({ title, code, baseContent });
         return story.save();
       })
       .then(() => res.send({ code }))
@@ -94,7 +94,6 @@ module.exports = {
         let toUpdate = story.pages.id(pageId);
         toUpdate.set({ content });
         return story.save();
-
       })
       .then(() => Story.findById(storyId))
       .then(updated => res.send(updated))

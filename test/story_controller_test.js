@@ -81,32 +81,14 @@ describe("Story controller", () => {
     });
   });
 
-  it("POST to /story:id/page : add a page to a story on DB", done => {
+  it("PUT to /story/:storyId/page : add a page to story on DB", done => {
     Story.findOne({ code: "tuto0" }).then(tuto0 => {
       request(app)
-        .post(`/story/${tuto0._id}/page`)
+        .put(`/story/${tuto0._id}/page`)
         .send({ title: "page$ 23" })
         .end((err, res) => {
           assert(res.status === 200);
-          assert(res.body.code === "page23");
-
-          Story.findOne({ "pages.code": "page23" }, { "pages.$": 1 }).then(
-            page23 => {
-              assert(page23.pages[0].code === "page23");
-              done();
-            }
-          );
-        });
-    });
-  });
-
-  it("PUT to /story/:id/page : add a page to story on DB", done => {
-    Story.findOne({ code: "tuto0" }).then(tuto0 => {
-      request(app)
-        .put(`/story/${tuto0.code}/page`)
-        .send({ title: "page$ 23" })
-        .end((err, res) => {
-          assert(res.status === 200);
+          console.log(res.body);
           assert(res.body[0].pages.length === 3);
 
           Story.findOne({ "pages.code": "page23" }, { "pages.$": 1 }).then(
@@ -122,7 +104,7 @@ describe("Story controller", () => {
   it("PUT to /story/:storyId/page/:pageId/content : update content of  page on DB", done => {
     Story.findOne({ code: "tuto0" }).then(tuto0 => {
       request(app)
-        .put(`/story/${tuto0._id}/page/${tuto0.pages[0]._id}/content`)
+        .post(`/story/${tuto0._id}/page/${tuto0.pages[0]._id}/content`)
         .send({ content: "updated content" })
         .end((err, res) => {
           assert(res.status === 200);

@@ -88,8 +88,7 @@ describe("Story controller", () => {
         .send({ title: "page$ 23" })
         .end((err, res) => {
           assert(res.status === 200);
-          console.log(res.body);
-          assert(res.body[0].pages.length === 3);
+          assert(res.body.pages.length === 3);
 
           Story.findOne({ "pages.code": "page23" }, { "pages.$": 1 }).then(
             page23 => {

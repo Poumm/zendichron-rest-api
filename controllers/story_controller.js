@@ -68,7 +68,8 @@ module.exports = {
         story.pages.push({ title, code, baseContent });
         return story.save();
       })
-      .then(() => res.send({ code }))
+      .then(() => Story.findOne({ _id: storyId }))
+      .then(updated => res.send(updated))
       .catch(next);
   },
 

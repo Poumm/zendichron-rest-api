@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 
 const Story = require("../models/story");
 
-const baseContent = require("../datas/content");
-
 function createCodeFromTitle(title) {
   return title.replace(/[^\w]/gi, "").toLowerCase();
 }
@@ -65,7 +63,7 @@ module.exports = {
     const code = createCodeFromTitle(title);
     Story.findOne({ _id: storyId })
       .then(story => {
-        story.pages.push({ title, code, baseContent });
+        story.pages.push({ title, code });
         return story.save();
       })
       .then(() => {

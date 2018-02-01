@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec mocha --recursive -R min"
+    "test": "nodemon --exec mocha --recursive -R min",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,8 +16,5 @@
     "mocha": "^4.0.1",
     "mongoose": "^4.13.3",
     "supertest": "^3.0.0"
-  },
-  "scripts": {
-    "start": "node index.js"
   }
 }

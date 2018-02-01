@@ -7,7 +7,10 @@ const storyRoutes = require("./routes/storyRoutes");
 
 mongoose.Promise = global.Promise;
 if (process.env.NODE_ENV !== "test")
-  mongoose.connect("mongodb://localhost/zendichron", { useMongoClient: true });
+  mongoose.connect(
+    "mongodb://heroku_vfndxmlg:udb8jr1lkud1leas76aja7tbbb@ds121588.mlab.com:21588/heroku_vfndxmlg",
+    { useMongoClient: true }
+  );
 
 // Add headers allow cross access
 app.use(function(req, res, next) {

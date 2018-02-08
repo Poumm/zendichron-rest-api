@@ -4,15 +4,14 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const storyRoutes = require("./routes/storyRoutes");
-const dbUrl = require("./api-config.js");
-
+const config = require("./api-config.js");
 mongoose.Promise = global.Promise;
 
-mongoose.connect(dbUrl, { useMongoClient: true });
+mongoose.connect(config.dbUrl, { useMongoClient: true });
 
 // Add headers allow cross access
 app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", config.allowOrigin);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"

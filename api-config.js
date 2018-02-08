@@ -11,5 +11,5 @@ if (process.env === null) {
 } else {
   dbUrl = "mongodb://localhost/zendichron";
 }
-
-module.exports = dbUrl;
+const config = { allowOrigin: allowOrigin, dbUrl: dbUrl };
+module.exports = config;

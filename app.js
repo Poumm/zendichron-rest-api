@@ -7,7 +7,18 @@ const storyRoutes = require("./routes/storyRoutes");
 const config = require("./api-config.js");
 mongoose.Promise = global.Promise;
 
-mongoose.connect(config.dbUrl, { useMongoClient: true });
+mongoose.connect(config.dbUrl, {
+  useMongoClient: true,
+  keepAlive: 300000,
+  connectTimeoutMS: 30000
+});
+var conn = mongoose.connection;
+
+conn.on("error", console.error.bind(console, "connection error:"));
+
+conn.once("open", function() {
+  console.log("connection ok");
+});
 
 // Add headers allow cross access
 app.use(function(req, res, next) {

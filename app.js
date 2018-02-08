@@ -4,13 +4,11 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const storyRoutes = require("./routes/storyRoutes");
+const dbUrl = require("./api-config.js");
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(
-  "mongodb://heroku_vfndxmlg:udb8jr1lkud1leas76aja7tbbb@ds121588.mlab.com:21588/heroku_vfndxmlg",
-  { useMongoClient: true }
-);
+mongoose.connect(dbUrl, { useMongoClient: true });
 
 // Add headers allow cross access
 app.use(function(req, res, next) {

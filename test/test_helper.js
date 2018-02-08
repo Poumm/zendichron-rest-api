@@ -4,9 +4,6 @@ const Story = require("../models/story");
 
 before(done => {
   process.env.NODE_ENV = "test";
-  mongoose.connect("mongodb://localhost/zendichron_test", {
-    useMongoClient: true
-  });
   mongoose.connection.once("open", () => done()).on("error", err => {
     console.warn("Warning", err);
   });

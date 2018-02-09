@@ -16,8 +16,12 @@ var conn = mongoose.connection;
 
 conn.on("error", console.error.bind(console, "connection error:"));
 
-conn.once("open", function() {
-  console.log("connection ok");
+mongoose.connection.on("error", function(error) {
+  console.error("Database connection error:", error);
+});
+
+mongoose.connection.once("open", function() {
+  console.log("Database connected");
 });
 
 // Add headers allow cross access
